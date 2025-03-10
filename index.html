@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Journey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fce4ec;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #login, #content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #login {
+            display: block;
+        }
+        #content {
+            display: none;
+            width: 300px;
+            position: relative;
+        }
+        img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        #info {
+            margin-left: 100px;
+            text-align: left;
+        }
+        #timer {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        /* Tombol bulat */
+        .circle-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background-color: #ff4081;
+            cursor: pointer;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Halaman Login -->
+    <div id="login">
+        <h2>Masukkan Sandi</h2>
+        <input type="password" id="password" placeholder="******">
+        <br><br>
+        <button class="circle-button" onclick="checkPassword()"></button>
+    </div>
+
+    <!-- Halaman Konten -->
+    <div id="content">
+        <img src="foto_pacar.jpg" alt="Pacarku">
+        <div id="info">
+            <h3>How long have been together♡</h3>
+            <p id="yearsMonths"></p>
+            <p id="timer"></p>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("password").value;
+            if (password === "142010") {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("content").style.display = "block";
+                startTimer();
+            } else {
+                alert("Sandi salah!");
+            }
+        }
+
+        function startTimer() {
+            const startDate = new Date(2024, 10, 4); // 4 November 2024 (bulan dimulai dari 0)
+            setInterval(() => {
+                const now = new Date();
+                const diff = now - startDate;
+
+                const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+                const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+                document.getElementById("yearsMonths").textContent = `${years} Tahun ${months} Bulan`;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+                document.getElementById("timer").textContent = `${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
